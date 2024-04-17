@@ -1,23 +1,72 @@
+const test_question = ["Why is water wet?"]
+const ta = ["It isn't"]
+
+
+const test_questions = [
+    {
+        "id": 1,
+        "question": "Why is water wet?"
+    },
+    {
+        "id": 2,
+        "question": "What kind of cheese do you put on a quesadilla?"
+    },
+    {
+        "id": 3,
+        "question": "Do birds exist?"
+    },
+    {
+        "id": 4,
+        "question": "Why does the sun rise in the East, and sets in the West?"
+    }
+]
+
+const test_answers = [
+    {
+        "id": 1,
+        "answers": ["It isn't", "Cohesion and adhesion", "It hasn't figured out how to be dry yet", "Taking a shower"],
+        "correct answer": 1
+    },
+    {
+        "id": 2,
+        "answers": ["Mozzarella", "Chedder", "American", "Velveta", "Yes"],
+        "correct answer": 4
+    },
+    {
+        "id": 3,
+        "answers": ["Yes", "No"],
+        "correct answer": 1
+    },
+    {
+        "id": 4,
+        "answers": ["It's afraid of the dark", "No", "Earth rotates from west to east", "It does't want a sun burn"],
+        "correct answer": 2
+    }
+]
+
+
+
+
 const append_buttons = () => {
     const start_text = document.getElementById("intro")
-    const test_question = ["Why is water wet?"]
     const h2Tag = document.createElement("h2")
-    h2Tag.innerHTML = test_question
-    start_text.parentNode.replaceChild(h2Tag, start_text)
-    const ta = ["It isn't"]
     const original_button = document.getElementById("btn")
-    let first_button_test = document.createElement("div")
     const question_div = document.createElement("div")
+    const first_button_test = document.createElement("div")
+
+    h2Tag.innerHTML = test_question[0]
+    first_button_test.innerHTML = ta[0]
+
+    start_text.parentNode.replaceChild(h2Tag, start_text)
     question_div.setAttribute("class", "row")
     first_button_test.setAttribute("type", "button")
     first_button_test.setAttribute("class", "btn btn-secondary")
-    first_button_test.innerHTML = ta[0]
     original_button.parentNode.replaceChild(first_button_test, original_button)
     // for (let i = 0; i < test_answers.length; i++) {
     //     const ta = test_answers[i]
     //     ;
     // }
-    console.log("success?")
+    console.log("initial button works")
 }
 
 const button_do = () => {
