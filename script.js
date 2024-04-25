@@ -91,20 +91,20 @@ const append_buttons = () => {
 
         answer_buttons.addEventListener("click", function () {
             if (i === answersId.correctAnswer) {
-                nextQuestion("Correct!")
+                correctOrIncorrect("Correct!")
                 // console.log("correct!")
             }
             else {
-                nextQuestion("incorrect!")
+                correctOrIncorrect("incorrect!")
                 // console.log("incorrect")
             }
         })
 
-        const nextQuestion = (a) => {
-            const nextButton = document.createElement("button")
-            nextButton.setAttribute("class", "btn btn-dark")
-            nextButton.textContent = a
-            answered.appendChild(nextButton)
+        const correctOrIncorrect = (a) => {
+            const answered = document.getElementById("answered")
+            const answeredQuestion = document.createElement("h2")
+            answeredQuestion.textContent = a
+            answered.appendChild(answeredQuestion)
 
         }
 
