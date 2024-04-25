@@ -20,23 +20,23 @@ const test_questions = [
 const test_answers = [
     {
         "id": 1,
-        "answers": ["It isn't", "Cohesion and adhesion", "It hasn't figured out how to be dry yet", "I was taking a shower"],
-        "correct answer": 1
+        "answers": ["It isn't", "Cohesion and adhesion", "It hasn't figured out how to be dry yet", "It was taking a shower"],
+        "correctAnswer": 1
     },
     {
         "id": 2,
         "answers": ["Mozzarella", "Chedder", "American", "Velveta", "Yes"],
-        "correct answer": 4
+        "correctAnswer": 4
     },
     {
         "id": 3,
         "answers": ["Yes", "No"],
-        "correct answer": 1
+        "correctAnswer": 1
     },
     {
         "id": 4,
         "answers": ["It's afraid of the dark", "No", "Earth rotates from west to east", "It does't want a sun burn"],
-        "correct answer": 2
+        "correctAnswer": 2
     }
 ]
 
@@ -86,11 +86,19 @@ const append_buttons = () => {
         append_buttons.appendChild(rowDiv)
         rowDiv.appendChild(colDiv)
         colDiv.appendChild(answer_buttons)
-        
+
+        selectedAnswer(answer_buttons, i, answersId.correctAnswer)
     }
-    
-    answersIndex++
-
-
+    answersIndex++ 
 }
 
+const selectedAnswer = (answer_buttons, i, correctAnswer) =>{
+    answer_buttons.addEventListener("click", function(){
+        if(i === correctAnswer){
+            console.log("correct!")
+        }
+        else {
+            console.log("incorrect")
+        }
+    })
+}
