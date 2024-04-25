@@ -42,7 +42,7 @@ const test_answers = [
 
 const button_do = () => {
     const clickbtn = document.getElementById("btn")
-    clickbtn.addEventListener("click", function(){
+    clickbtn.addEventListener("click", function () {
         append_question()
         append_buttons()
     })
@@ -56,25 +56,27 @@ const append_question = () => {
     const append_question = document.getElementById("start_quiz")
     let questionId = test_questions[questionIndex]
     append_question.innerHTML = ''
-    
+
     const h1 = document.createElement("h1")
     h1.appendChild(document.createTextNode(questionId.question))
     append_question.appendChild(h1)
     questionIndex++
-    
+
 
 }
 
-let answersIndex =  0
+let answersIndex = 0
 
 const append_buttons = () => {
     let answersId = test_answers[answersIndex]
     const append_buttons = document.getElementById("append_buttons")
+    const answered = document.getElementById("nextQuestion")
     const rowDiv = document.createElement("div")
     rowDiv.setAttribute("class", "row")
-    
+
     append_buttons.innerHTML = ''
-    
+    answered.innerHTML = ''
+
     for (let i = 0; i < answersId.answers.length; i++) {
         const all_buttons = answersId.answers[i]
         const colDiv = document.createElement("div")
@@ -82,23 +84,48 @@ const append_buttons = () => {
         const answer_buttons = document.createElement("button")
         answer_buttons.setAttribute("class", "btn btn-dark")
         answer_buttons.textContent = all_buttons
-        
+
         append_buttons.appendChild(rowDiv)
         rowDiv.appendChild(colDiv)
         colDiv.appendChild(answer_buttons)
 
-        selectedAnswer(answer_buttons, i, answersId.correctAnswer)
+        answer_buttons.addEventListener("click", function () {
+            if (i === answersId.correctAnswer) {
+                nextQuestion("Correct!")
+                // console.log("correct!")
+            }
+            else {
+                nextQuestion("incorrect!")
+                // console.log("incorrect")
+            }
+        })
+
+        const nextQuestion = (a) => {
+            const nextButton = document.createElement("button")
+            nextButton.setAttribute("class", "btn btn-dark")
+            nextButton.textContent = a
+            answered.appendChild(nextButton)
+
+        }
+
     }
-    answersIndex++ 
+    answersIndex++
 }
 
-const selectedAnswer = (answer_buttons, i, correctAnswer) =>{
-    answer_buttons.addEventListener("click", function(){
-        if(i === correctAnswer){
-            console.log("correct!")
-        }
-        else {
-            console.log("incorrect")
-        }
-    })
-}
+
+
+
+
+
+// selectedAnswer(answer_buttons, i, answersId.correctAnswer)
+
+// const selectedAnswer = (answer_buttons, i, correctAnswer) =>{
+//     answer_buttons.addEventListener("click", function(){
+//         if(i === correctAnswer){
+//             console.log("correct!")
+//         }
+//         else {
+//             console.log("incorrect")
+//         }
+//     })
+// }
