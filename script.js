@@ -43,29 +43,56 @@ const test_answers = [
 const button_do = () => {
     const clickbtn = document.getElementById("btn")
     clickbtn.addEventListener("click", function(){
-       append_buttons()
+        append_question()
+        append_buttons()
     })
 }
 
 button_do()
 
-let currentIndex = 0
+let questionIndex = 0
 
-const append_buttons = () => {
+const append_question = () => {
     const append_question = document.getElementById("start_quiz")
-    const append_buttons = document.getElementById("append_buttons")
-    let questionId = test_questions[currentIndex]
+    let questionId = test_questions[questionIndex]
+    append_question.innerHTML = ''
     
     const h1 = document.createElement("h1")
     h1.appendChild(document.createTextNode(questionId.question))
-    append_question.parentNode.replaceChild(h1, append_question)
-    currentIndex++
+    append_question.appendChild(h1)
+    questionIndex++
     
-    console.log(questionId)
 
 }
 
-console.log(test_questions)
+let answersIndex =  0
+
+const append_buttons = () => {
+    let answersId = test_answers[answersIndex]
+    const append_buttons = document.getElementById("append_buttons")
+    
+    append_buttons.innerHTML = ''
+    
+    // const answer_buttons = document.createElement("button")
+    // answer_buttons.setAttribute("class", "btn btn-dark")
+    // answer_buttons.appendChild(document.createTextNode(answersId.answers[0]))
+    // append_buttons.parentNode.replaceChild(answer_buttons, append_buttons)
+    
+    for (let i = 0; i < answersId.answers.length; i++) {
+        const all_buttons = answersId.answers[i]
+        const answer_buttons = document.createElement("button")
+        answer_buttons.setAttribute("class", "btn btn-dark")
+        answer_buttons.textContent = all_buttons
+        
+        append_buttons.appendChild(answer_buttons)
+    }
+    
+    answersIndex++
+
+
+}
+
+// console.log(test_answers[0].answers[0])
 // const append_buttons = () => {
 //     const start_text = document.getElementById("intro")
 //     const h2Tag = document.createElement("h2")
