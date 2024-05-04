@@ -45,7 +45,10 @@ const append_buttons = document.getElementById("append_buttons")
 const moveOn = document.getElementById("nextQuestion")
 const answered = document.getElementById("answered")
 
-//sets the event listener on the "click me" button. First function that fires
+let questionIndex = 0
+let answersIndex = 0
+
+
 const commenceQuiz = () => {
     const clickbtn = document.getElementById("btn")
     clickbtn.addEventListener("click", function () {
@@ -53,12 +56,7 @@ const commenceQuiz = () => {
         appendButtons()
     })
 }
-
 commenceQuiz()
-
-let questionIndex = 0
-let answersIndex = 0
-
 
 const appendQuestionButtons = () => {
     append_question.innerHTML = ''
@@ -112,8 +110,8 @@ const nextQuestionBtn = (b) =>{
     moveButton.innerHTML = b
     moveOn.appendChild(moveButton)
     moveOn.addEventListener("click", function(){
-        moveOn.textContent = ''
-        
+        moveOn.innerHTML = ''
+        answered.innerHTML = ''
         appendQuestionButtons()
         appendButtons()
     })
