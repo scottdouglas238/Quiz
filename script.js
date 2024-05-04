@@ -64,17 +64,16 @@ const appendQuestionButtons = () => {
     const h1 = document.createElement("h1")
     h1.appendChild(document.createTextNode(questionId.question))
     append_question.appendChild(h1)
-    console.log("questionIndex " + questionIndex) 
 }
 
 const appendButtons = () => {
-    console.log("answerIndex " + answersIndex)
     let answersId = test_answers[answersIndex]
     const rowDiv = document.createElement("div")
     rowDiv.setAttribute("class", "row")
     append_buttons.textContent = '' 
 
     for (let i = 0; i < answersId.answers.length; i++) {
+
         const all_buttons = answersId.answers[i]
         const colDiv = document.createElement("div")
         colDiv.setAttribute("class", "col")
@@ -86,20 +85,28 @@ const appendButtons = () => {
         rowDiv.appendChild(colDiv)
         colDiv.appendChild(answer_buttons)
 
-        answer_buttons.addEventListener("click", function () {
+        
+        answer_buttons.addEventListener("click", function fullSend(){
             if (i === answersId.correctAnswer) {
-                correctOrIncorrect("Correct!")
+                correctOrIncorrect(all_buttons + ", is correct!")
                 nextQuestionBtn("Next Question!")
                 questionIndex++
                 answersIndex++
+                answer_buttons.removeEventListener("click", fullSend)
             }
             else {
-                correctOrIncorrect("Incorrect!")
+                correctOrIncorrect(all_buttons + ", is incorrect!")
                 nextQuestionBtn("Next Question!")
                 questionIndex++
                 answersIndex++
+                answer_buttons.removeEventListener("click", fullSend)
             }
+
         })
+        
+        
+        
+
     }
 }
 
@@ -124,11 +131,6 @@ const correctOrIncorrect = (a) => {
     answered.appendChild(answeredQuestion)
 
 }
-
-
-
-
-
 
 
 
