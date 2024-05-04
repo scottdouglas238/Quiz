@@ -40,42 +40,41 @@ const test_answers = [
     }
 ]
 
-const button_do = () => {
+const append_question = document.getElementById("start_quiz")
+const append_buttons = document.getElementById("append_buttons")
+const moveOn = document.getElementById("nextQuestion")
+const answered = document.getElementById("answered")
+
+//sets the event listener on the "click me" button. First function that fires
+const commenceQuiz = () => {
     const clickbtn = document.getElementById("btn")
     clickbtn.addEventListener("click", function () {
-        append_question()
-        append_buttons()
+        appendQuestionButtons()
+        appendButtons()
     })
 }
 
-button_do()
+commenceQuiz()
 
 let questionIndex = 0
+let answersIndex = 0
 
-const append_question = () => {
-    const append_question = document.getElementById("start_quiz")
-    let questionId = test_questions[questionIndex]
+
+const appendQuestionButtons = () => {
     append_question.innerHTML = ''
-
+    let questionId = test_questions[questionIndex]
     const h1 = document.createElement("h1")
     h1.appendChild(document.createTextNode(questionId.question))
     append_question.appendChild(h1)
-    questionIndex++
-
-
+    console.log("questionIndex " + questionIndex) 
 }
 
-let answersIndex = 0
-
-const append_buttons = () => {
+const appendButtons = () => {
+    console.log("answerIndex " + answersIndex)
     let answersId = test_answers[answersIndex]
-    const append_buttons = document.getElementById("append_buttons")
-    const answered = document.getElementById("nextQuestion")
     const rowDiv = document.createElement("div")
     rowDiv.setAttribute("class", "row")
-
-    append_buttons.innerHTML = ''
-    answered.innerHTML = ''
+    append_buttons.textContent = '' 
 
     for (let i = 0; i < answersId.answers.length; i++) {
         const all_buttons = answersId.answers[i]
@@ -92,24 +91,40 @@ const append_buttons = () => {
         answer_buttons.addEventListener("click", function () {
             if (i === answersId.correctAnswer) {
                 correctOrIncorrect("Correct!")
-                // console.log("correct!")
+                nextQuestionBtn("Next Question!")
+                questionIndex++
+                answersIndex++
             }
             else {
-                correctOrIncorrect("incorrect!")
-                // console.log("incorrect")
+                correctOrIncorrect("Incorrect!")
+                nextQuestionBtn("Next Question!")
+                questionIndex++
+                answersIndex++
             }
         })
-
-        const correctOrIncorrect = (a) => {
-            const answered = document.getElementById("answered")
-            const answeredQuestion = document.createElement("h2")
-            answeredQuestion.textContent = a
-            answered.appendChild(answeredQuestion)
-
-        }
-
     }
-    answersIndex++
+}
+
+const nextQuestionBtn = (b) =>{
+    console.log(answersIndex, questionIndex)
+    const moveButton = document.createElement("button")
+    moveButton.setAttribute("class","btn btn-dark")
+    moveButton.innerHTML = b
+    moveOn.appendChild(moveButton)
+    moveOn.addEventListener("click", function(){
+        moveOn.textContent = ''
+        
+        appendQuestionButtons()
+        appendButtons()
+    })
+}
+
+const correctOrIncorrect = (a) => {
+    answered.innerHTML = ''
+    const answeredQuestion = document.createElement("h2")
+    answeredQuestion.innerHTML = a
+    answered.appendChild(answeredQuestion)
+
 }
 
 
@@ -117,15 +132,6 @@ const append_buttons = () => {
 
 
 
-// selectedAnswer(answer_buttons, i, answersId.correctAnswer)
 
-// const selectedAnswer = (answer_buttons, i, correctAnswer) =>{
-//     answer_buttons.addEventListener("click", function(){
-//         if(i === correctAnswer){
-//             console.log("correct!")
-//         }
-//         else {
-//             console.log("incorrect")
-//         }
-//     })
-// }
+
+
