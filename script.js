@@ -86,29 +86,28 @@ const appendButtons = () => {
         colDiv.appendChild(answer_buttons)
 
         
-        answer_buttons.addEventListener("click", function fullSend(){
-            if (i === answersId.correctAnswer) {
-                correctOrIncorrect(all_buttons + ", is correct!")
-                nextQuestionBtn("Next Question!")
-                questionIndex++
-                answersIndex++
-                answer_buttons.removeEventListener("click", fullSend)
-            }
-            else {
-                correctOrIncorrect(all_buttons + ", is incorrect!")
-                nextQuestionBtn("Next Question!")
-                questionIndex++
-                answersIndex++
-                answer_buttons.removeEventListener("click", fullSend)
-            }
+        answer_buttons.addEventListener("click", function(){
+            addFunctionality(i, answersId.correctAnswer, all_buttons)
 
         })
-        
-        
-        
-
-    }
+    } 
 }
+
+
+const addFunctionality = (i, answersId, all_buttons) => {
+    if (i === answersId.correctAnswer) {
+        correctOrIncorrect(all_buttons + ", is correct!")
+        nextQuestionBtn("Next Question!")
+    }
+    else {
+        correctOrIncorrect(all_buttons + ", is incorrect!")
+        nextQuestionBtn("Next Question!") 
+    }
+    questionIndex++
+    answersIndex++
+}
+
+
 
 const nextQuestionBtn = (b) =>{
     console.log(answersIndex, questionIndex)
@@ -131,6 +130,7 @@ const correctOrIncorrect = (a) => {
     answered.appendChild(answeredQuestion)
 
 }
+
 
 
 
